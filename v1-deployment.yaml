@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streaming-v1
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: streaming
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: streaming
+        version: v1
+    spec:
+      containers:
+      - name: app
+        image: hashicorp/http-echo
+        args:
+        - "-text=Version 1"
+        ports:
+        - containerPort: 5678
